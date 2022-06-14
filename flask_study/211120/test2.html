@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>中奖提示！</title>
+</head>
+<body>
+  {% if number==1 %}
+    <h1>恭喜！您抽得一等奖，获得为小红购买一个包包的机会！(●'◡'●)</h1>
+  {% elif number==2 %}
+    <h1>恭喜！您抽得二等奖，获得为小红购买一支口红的机会！(●'◡'●)</h1>
+  {% elif number==3 %}
+    <h1>恭喜！您抽得三等奖，获得为小红购买一个冰淇淋的机会！(●'◡'●)</h1>
+  {% else %}
+    <h1>很遗憾！您未中奖！(；′⌒`)</h1>
+  {% endif %}
+    <h1>中奖数字为：{{number}}</h1>
+
+  {% for good in goods %}
+    {% if good.price>20 %}
+      <input type="checkbox" name="goodname" value= {{good.name}}>{{good.name}}<br>
+    {% endif %}
+  {% endfor %}
+  <hr>
+  {% for good in goods %}
+    {% if good.price>20 %}
+      <select name="tip">
+            <option value="name">{{ good.name }}</option>
+            <option value="price">价格:{{ good.price }}</option>
+            <option value="number">库存:{{ good.number }}</option>
+            <option value="color">颜色:{{good.color}}</option>
+        </select>
+        <br>
+        <br>
+    {% endif %}
+  {% endfor %}
+  <a href="/">goback</a>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>价格表</title>
+</head>
+<body>
+    <table border="1">
+        <thead>
+            <th>商品名称</th>
+            <th>商品价格</th>
+            <th>库存</th>
+            <th>颜色</th>
+        </thead>
+        <tbody>
+            {% for good in goods %}
+                <tr>
+                {% if good.price > 20 %}
+                    <td>
+                        {{good.name}}
+                    </td>
+                    <td>
+                        {{good.price}}
+                    </td>
+                    <td>
+                        {{good.number}}
+                    </td>
+                    <td>
+                        {{good.color}}
+                    </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="/test2" target="_blank">跳转到结果</a>
+    <br>]
+    <a href="/">goback</a>
+</body>
+</html>

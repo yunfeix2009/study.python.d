@@ -1,0 +1,21 @@
+<html>
+<head>
+    {% block head %}
+        <title>{% block title %}
+            {% endblock %} - My Application
+        </title>
+    {% endblock %}
+<style>
+    {% block style %}
+        .box1{
+            padding: 5px;
+            background-color: skyblue;
+        }
+    {% endblock %}
+</style>
+</head>
+<body>
+{% block content %}
+{% endblock %}
+</body>
+</html>

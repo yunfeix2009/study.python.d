@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>display</title>
+</head>
+<body>
+
+  {% for i in value %}
+    文章名：
+    {{ i['title'] }}
+    <br>
+
+    作者：
+    {{ i['creater'] }}
+    <br>
+
+    内容：
+    {{ i['arc_contents'] }}
+    <hr>
+  {% endfor %}
+</body>
+</html>

@@ -1,0 +1,10 @@
+print('输入两个变量，这里会交换他们')
+a=float(input('输入要交换的第一个变量'))
+b=float(input('输入要交换的第二个变量'))
+print('交换前')
+print('a=',a,'b=',b)
+a=a+b
+b=a-b
+a=a-b
+print('交换后')
+print('a=',a,'b=',b)

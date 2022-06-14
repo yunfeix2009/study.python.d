@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>test</title>
+</head>
+<body>
+    {% for i in list1 %}
+        <p> {% if i %2 ==0 %} {{ i }}
+        是偶数 {% else %} {{ i }}
+        是奇数 {% endif %} </p>
+    {% endfor %}
+    <a href="/">goback</a>
+</body>
+</html>

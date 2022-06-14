@@ -1,0 +1,67 @@
+import turtle
+t = turtle.Turtle()
+t.speed(0)
+# 右眼睛
+t.up()
+t.goto(80,80)
+t.down()
+t.begin_fill()
+t.circle(20)
+t.end_fill()
+# 右眉毛
+t.up()
+t.left(40)
+t.goto(50,120)
+t.down()
+t.circle(-50,90)
+t.up()
+t.seth(0)
+# 左眼睛
+t.goto(-80,80)
+t.down()
+t.begin_fill()
+t.circle(20)
+t.end_fill()
+# 左眉毛
+t.up()
+t.left(40)
+t.goto(-110,120)
+t.down()
+t.circle(-50,90)
+t.up()
+# 重置画笔角度
+t.seth(0)
+# 鼻子
+t.up()
+t.goto(0,40)
+t.down()
+t.color('red')
+t.begin_fill()
+t.circle(-40,steps=3)
+t.end_fill()
+# 嘴巴
+t.up()
+t.color('black')
+t.goto(-80,-40)
+t.down()
+t.right(30)
+t.fd(90)
+t.left(60)
+t.fd(90)
+t.up()
+t.goto(0,-110)
+t.down()
+t.right(30)
+t.circle(150)
+
+# 身体左边
+t.left(180)
+t.circle(200,90)
+#  身体右边
+t.up()
+t.goto(0,-110)
+t.down()
+t.seth(0)
+t.circle(-200,90)
+# 隐藏画笔
+t.ht()

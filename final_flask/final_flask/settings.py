@@ -1,8 +1,8 @@
 from final_flask import app
 import os
 from datetime import timedelta
-app.secret_key = "1"
 
+app.secret_key = "1"
 
 app.config.update(
     MAIL_SERVER='smtp.163.com',
@@ -15,5 +15,6 @@ app.config.update(
     SQLALCHEMY_TRACK_MODIFICATIONS=False,
     SQLALCHEMY_DATABASE_URI='mysql://root:123456@127.0.0.1:3306/testdb_orm',
     SECRET_KEY=os.urandom(24),
-    PERMANENT_SESSION_LIFETIME = timedelta(days=7)
+    PERMANENT_SESSION_LIFETIME=timedelta(days=7),
+    log_file_pass='D:\steven'
 )

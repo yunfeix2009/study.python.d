@@ -1,24 +1,27 @@
 from flask import Blueprint, render_template,request, session, redirect, flash
 from final_flask.sql_moudle import Sql_class, get_current_usr_zan_wz_list, get_all_display_wz_data, get_wz_html_data
 from final_flask.forms import RegisterForm
-
-article_publish = Blueprint('message_board', __name__, template_folder='templates', static_folder='static')
+from final_flask.log_module import logger
+from flask import jsonify
+article_publish = Blueprint('article_publish', __name__, template_folder='templates', static_folder='static')
 
 
 cls = Sql_class()
 @article_publish.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('logins_2.html')
+    ip = request.remote_addr
+    logger.critical('ip: ' + ip + 'entering root route in article_publish')
+    return render_template('login.html')
 
 
 @article_publish.route('/homepage', methods=['post', 'get'])
-def logins():
+def login():
     if (request.method == 'POST'):
+        ip = request.remote_addr
+        logger.critical('ip: ' + ip + 'entering homepage route in article_publish')
         username = request.form.get('username')
         password = request.form.get("password")
-        print('homepage: username:' + str(username), 'password:' + str(password))
         get_now_user_pwd_sql = "select count(*) from usr where usr_name='" + username + "' and pwd='" + password + "'"
-        print('homepage: get_now_user_pwd:' + get_now_user_pwd_sql)
         conn, cur = cls.get_conn()
         now_user_pwd = cls.query(cur, get_now_user_pwd_sql)
         print('homepage: n:' + str(now_user_pwd))
@@ -28,8 +31,10 @@ def logins():
             session['password'] = password
             session.permanent = True
             session[username] = "success"
+            logger.critical('username:' + str(username), 'password:' + str(password) + 'has successfully sign in')
             return render_template('homepage.html', value=get_current_usr_zan_wz_list())
         else:
+            logger.critical('username:' + str(username), 'password:' + str(password) + 'has failed to sign in')
             return '<h1><span style="color:red"> 用户名或密码错误<span><h1>'
     else:
         return render_template('homepage.html', value=get_current_usr_zan_wz_list())
@@ -37,20 +42,19 @@ def logins():
 
 @article_publish.route('/wz_list')
 def wz_list():
+    ip = request.remote_addr
+    logger.critical('ip: ' + ip + 'entering wz_list route in article_publish')
     return render_template('wz_list.html', value=get_all_display_wz_data())
 
 
 @article_publish.route('/wz')
 def wz():
+    ip = request.remote_addr
+    logger.critical('ip: ' + ip + 'entering wz route in article_publish')
+    # ip = jsonify({'ip': request.environ.get('HTTP_X_REAL_IP', request.remote_addr)})
+    # logger.critical(str(ip) + 'entering homepage route in article_publish')
     id = request.args.get('id')
-    print(id)
     wz, zan = get_wz_html_data(id)
-    print('wz')
-    print(wz)
-    print('***')
-    print('zan')
-    print(zan)
-    print('***')
     author = wz[0][0]
     title = wz[0][1]
     content = wz[0][2]
@@ -59,33 +63,38 @@ def wz():
         ls.append(i[0])
     likes = len(ls)
     usr = session['username']
-    print('author')
-    print(author)
-    print('title')
-    print(title)
-    print('content')
-    print(content)
-    print('ls')
-    print(ls)
-    print('likes')
-    print(likes)
-    print('current_usr')
-    print(usr)
+    logger.critical('id:' + id,
+                    'wz:' + wz,
+                    'zan:' + zan,
+                    'author:' + author,
+                    'title:' + title,
+                    'content:' + content,
+                    'ls:' + str(ls),
+                    'likes:' + str(likes),
+                    'current_usr:' + usr,
+                    'wz:' + wz,
+                    )
     return render_template('wz.html', author=author, title=title, content=content, zaner=ls, likes=likes, usr=usr, id=id)
 
 
 @article_publish.route('/author')
 def author():
+    ip = request.remote_addr
+    logger.critical('ip: ' + ip + 'entering author route in article_publish')
     return render_template('wz.html', value=get_all_display_wz_data())
 
 
 @article_publish.route('/publish')
 def publish():
+    ip = request.remote_addr
+    logger.critical('ip: ' + ip + 'entering publish route in article_publish')
     return render_template('publish_2.html')
 
 
 @article_publish.route('/publish_content', methods=['post'])
 def publish_content():
+    ip = request.remote_addr
+    logger.critical('ip: ' + ip + 'entering publish_content route in article_publish')
     username = session.get('username')
     title = request.form.get('title')
     arc_contents = request.form.get('arc_contents')
@@ -99,6 +108,8 @@ def publish_content():
 
 @article_publish.route('/join', methods=['GET', 'POST'])
 def root():
+    ip = request.remote_addr
+    logger.critical('ip: ' + ip + 'entering join route in article_publish')
     form = RegisterForm()
     if form.validate_on_submit():
         name = form.us.data
@@ -115,6 +126,8 @@ def root():
 
 @article_publish.route('/save_usr', methods=['post', 'get'])
 def save_usr():
+    ip = request.remote_addr
+    logger.critical('ip: ' + ip + 'entering save_usr route in article_publish')
     username = request.form.get("us")
     password1 = request.form.get("ps")
     password2 = request.form.get("ps2")
@@ -134,6 +147,8 @@ def save_usr():
 
 @article_publish.route('/dian_zan')
 def dian_zan():
+    ip = request.remote_addr
+    logger.critical('ip: ' + ip + 'entering dian_zan route in article_publish')
     username = session['username']
     wz_id = request.args.get('wz_id')
     dian_zan_sql = "insert into zan values('" + username + "','" + wz_id + "')"
@@ -145,6 +160,8 @@ def dian_zan():
 
 @article_publish.route('/qu_xiao', methods=['post', 'get'])
 def qu_xiao():
+    ip = request.remote_addr
+    logger.critical('ip: ' + ip + 'entering qu_xiao route in article_publish')
     username = session['username']
     wz_id = request.args.get('wz_id')
     dian_zan_sql = "delete from zan where wz_id='" + wz_id + "' and usr_id='" + username + "'"
@@ -156,6 +173,8 @@ def qu_xiao():
 
 @article_publish.after_request
 def after_request(response):
+    ip = request.remote_addr
+    logger.critical('ip: ' + ip + 'entering after_request route in article_publish')
     print('Access to : ' + request.full_path)
     return response
 

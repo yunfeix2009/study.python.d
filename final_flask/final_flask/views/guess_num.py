@@ -1,14 +1,10 @@
 from flask import session, request, Blueprint
-from final_flask.guess_num_help import title, title_text, create_text, get_info, add_info
-
+from final_flask.guess_num_help import title, title_text, create_text, get_info, add_info, js_code
+from final_flask.log_module import logger
 guess_num = Blueprint('guess_num', __name__, template_folder='templates', static_folder='static')
-
+logger.info()
 @guess_num.route("/")
 def index():
-    """
-    猜数字游戏
-    主页
-    """
     text = title + "<h1>欢迎来到猜数字游戏</h1>"
     if session.get("room"):
         room_num = session.get("room")

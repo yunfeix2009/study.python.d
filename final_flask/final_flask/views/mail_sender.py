@@ -2,19 +2,20 @@ from final_flask.forms import SendForm
 from flask import render_template, request, Blueprint
 from final_flask import app, mail
 from flask_mail import Message
+from final_flask.log_module import logger
+# mail_sender = Blueprint('mail_sender',__name__)
+mail_sender = Blueprint('mail_sender', __name__, template_folder='templates', static_folder='static')
+# mail_sender = Blueprint('mail_sender', __name__, template_folder='mail_sender_templates', static_folder='static')
 
-massage_board = Blueprint('message_board', __name__, template_folder='templates', static_folder='static')
-
-@massage_board.route('/')
+@mail_sender.route('/')
 def mainpage():
-    print("*" * 30 + 'mailsender' + '*' * 30)
+    logger.critical('entering root route in mail_sender')
     form = SendForm()
-    print("*" * 30 + 'mailsender' + '*' * 30)
     return render_template('mail_sender.html', form=form)
 
-@massage_board.route('/send', methods=['POST'])
+@mail_sender.route('/send', methods=['POST'])
 def send_mail():
-    print("*" * 30 + 'mailsender' + '*' * 30)
+    logger.critical('entering send route in mail_sender')
     subject = request.form.get('subject')
     to = request.form.get('address')
     body = request.form.get('content')
@@ -24,9 +25,13 @@ def send_mail():
     message = Message(subject, recipients=[to], sender=address, body=body)
     try:
         mail.send(message)
-        print("*" * 30 + 'mailsender' + '*' * 30)
+        logger.critical('successfully send a message with '
+                        'subject: ' + subject +
+                        ', address: ' + to +
+                        ', content: ' + name +
+                        ', name: ' + address
+                        + 'address of sender')
     except Exception as e:
-        print(str(e))
-        print("*" * 30 + 'mailsender' + '*' * 30)
+        logger.critical('error when sending' + e)
         return 'failed'
     return 'successed'

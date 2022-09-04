@@ -4,7 +4,7 @@ from final_flask.forms import HelloForm
 from final_flask.models import Message
 from final_flask.log_module import logger
 
-massage_board = Blueprint('message_board', __name__, template_folder='templates', static_folder='static')
+massage_board = Blueprint('message_board', __name__, template_folder='message_board_templates', static_folder='static')
 
 @massage_board.route('/', methods=['GET', 'POST'])
 def message_board():
@@ -22,3 +22,5 @@ def message_board():
         flash('Success！Your message have been sent to the world!')
         return redirect(url_for('message_board.index'))
     return render_template('message_board.html', form=form, messages=messages)
+
+

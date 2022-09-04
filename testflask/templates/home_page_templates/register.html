@@ -1,0 +1,20 @@
+{% extends 'base_main.html' %}
+{% block content %}
+    <center> <h1>请注册一个账号</h1> </center>
+    <form action="/register">
+        <div class="container">
+            <label>用户名</label>
+            <input type="text" placeholder="请输入你想注册的用户名用户名" name="username" required>
+            <label>昵称</label>
+            <input type="text" placeholder="请输入你想注册的昵称" name="alias" required>
+            <label>邮箱</label>
+            <input type="text" placeholder="请输入你的邮箱" name="email" required>
+            <label>密码</label>
+            <input type="password" placeholder="请输入密码" name="pass" required>
+            <label>确认密码</label>
+            <input type="password" placeholder="请确认你输入的密码" name="repass" required>
+            <button type="submit">提交</button>
+        </div>
+    </form>
+
+{% endblock %}

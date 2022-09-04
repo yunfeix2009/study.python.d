@@ -3,7 +3,7 @@ from final_flask.sql_moudle import Sql_class, get_current_usr_zan_wz_list, get_a
 from final_flask.forms import RegisterForm
 from final_flask.log_module import logger
 from flask import jsonify
-article_publish = Blueprint('article_publish', __name__, template_folder='templates', static_folder='static')
+article_publish = Blueprint('article_publish', __name__, template_folder='article_publish_templates', static_folder='static')
 
 
 cls = Sql_class()

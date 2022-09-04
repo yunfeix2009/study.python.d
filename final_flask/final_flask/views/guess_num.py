@@ -1,11 +1,10 @@
-from flask import session, request, Blueprint
+from flask import session, request, Blueprint, redirect, render_template
 from final_flask.guess_num_help import title, title_text, create_text, get_info, add_info, js_code
 from final_flask.log_module import logger
-guess_num = Blueprint('guess_num', __name__, template_folder='templates', static_folder='static')
+guess_num = Blueprint('guess_num', __name__, template_folder='guess_num_templates', static_folder='static')
 logger.info()
 @guess_num.route("/")
 def index():
-    text = title + "<h1>欢迎来到猜数字游戏</h1>"
     if session.get("room"):
         room_num = session.get("room")
         text += f"您已经创建了房间,房间号为:{room_num}"
@@ -16,7 +15,7 @@ def index():
     text += "<form action='/join' method='post'>\n"
     text += "房间号:<input type='text' name='room_num'/>\n"
     text += "<button>加入</button></form>"
-    return text
+    return render_template('index.html')
 
 
 @guess_num.route("/rule")
@@ -55,3 +54,30 @@ def check_form():
             return title + f"创建完毕,房间号:{room_num},目标数字:{target_num}"
     else:
         return title + "目标数字应为整数,请重新创建房间"
+
+
+
+
+
+@guess_num.after_request
+def after_request(response):
+    ip = request.remote_addr
+    logger.critical('ip: ' + ip + 'entering after_request route in article_publish')
+    print('Access to : ' + request.full_path)
+    return response
+
+
+@guess_num.before_request
+def before_request():
+    username = session.get('username')
+    if request.path != "/login":
+        if request.path == "/":
+            pass
+        elif request.path == "/homepage":
+            pass
+        elif request.path == "/join":
+            pass
+        elif request.path == "/save_usr":
+            pass
+        elif username == None or session.get(username) != 'success':
+            return redirect("/")

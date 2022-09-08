@@ -37,6 +37,7 @@ def get_info():
     conn, cur = sql.get_conn()
     info_query = 'select room_num, target_num from guess_num'
     info_tuple = sql.query(cur, info_query)
+    sql.close(conn, cur)
     info = {}
     for i in info_tuple:
         info[str(i[0])] = str(i[1])
@@ -47,6 +48,7 @@ def add_info(room_num, target_num):
     conn, cur = sql.get_conn()
     add_sql = 'insert into guess_num(room_num, target_num) values(' + room_num + ',' + target_num + ')'
     sql.normal_ex(conn, cur, add_sql)
+    sql.close(conn, cur)
 
 
 
@@ -94,30 +96,3 @@ def check_form():
             return render_template('guess_num_templates/successfully_create.html', room_num=room_num, target_num=target_num, basepath=basepath)
     else:
         return render_template('guess_num_templates/recreate_room_2.html', basepath=basepath)
-
-
-
-
-
-# @guess_num.after_request
-# def after_request(response):
-#     ip = request.remote_addr
-#     logger.critical('ip: ' + ip + 'entering after_request route in article_publish')
-#     print('Access to : ' + request.full_path)
-#     return response
-#
-#
-# @guess_num.before_request
-# def before_request():
-#     username = session.get('username')
-#     if request.path != "/login":
-#         if request.path == "/":
-#             pass
-#         elif request.path == "/homepage":
-#             pass
-#         elif request.path == "/join":
-#             pass
-#         elif request.path == "/save_usr":
-#             pass
-#         elif username == None or session.get(username) != 'success':
-#             return redirect("/")

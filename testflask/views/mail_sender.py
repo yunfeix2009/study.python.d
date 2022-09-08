@@ -1,5 +1,5 @@
-from views.forms import SendForm
-from flask import render_template, request, Blueprint, redirect
+from tools.forms import SendForm
+from flask import render_template, request, Blueprint
 from views import app, mail
 from flask_mail import Message
 # from final_flask.log_module import logger

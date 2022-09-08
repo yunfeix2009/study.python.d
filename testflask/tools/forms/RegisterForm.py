@@ -1,20 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, TextAreaField, PasswordField
+from wtforms import StringField, SubmitField, PasswordField
 from wtforms.validators import DataRequired, Length, EqualTo
-
-class HelloForm(FlaskForm):
-    name = StringField('Name', validators=[DataRequired(), Length(1, 20)])
-    body = TextAreaField('Message', validators=[DataRequired(), Length(1, 200)])
-    submit = SubmitField()
-
-
-class SendForm(FlaskForm):
-    subject = StringField('email subject:', validators=[DataRequired(), Length(1,50)])
-    address = StringField('email address', validators=[DataRequired(), Length(1, 50)])
-    content = TextAreaField('email', validators=[DataRequired(), Length(1, 500)])
-    name = StringField('your name', validators=[DataRequired(), Length(1, 50)])
-    email_address = StringField('your email address', validators=[DataRequired(), Length(1, 50)])
-    submit = SubmitField()
 
 
 class RegisterForm(FlaskForm):
@@ -36,4 +22,3 @@ class RegisterForm(FlaskForm):
                                     Length(max=100, message='别乱来'), ],
                         render_kw={'placeholder': '请输入笔名...'})
     submit = SubmitField(u'提交')
-

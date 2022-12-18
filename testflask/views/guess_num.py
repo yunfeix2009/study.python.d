@@ -1,7 +1,6 @@
 from flask import session, request, Blueprint, render_template
 from tools.log_module import logger
 from tools.models import sql
-import os
 guess_num = Blueprint('guess_num', __name__, template_folder='templates')
 
 basepath = '/guess_num/'
@@ -43,6 +42,16 @@ def get_info():
         info[str(i[0])] = str(i[1])
     return info
 
+def get_room_num():
+    conn, cur = sql.get_conn()
+    room_num_query = 'select room_num from guess_num'
+    room_num_tuple = sql.query(cur, room_num_query)
+    sql.close(conn, cur)
+    room_num = []
+    for i in room_num_tuple:
+        room_num.append(i[0])
+    return room_num
+
 
 def add_info(room_num, target_num):
     conn, cur = sql.get_conn()
@@ -61,6 +70,11 @@ def index():
 @guess_num.route("/rule")
 def rule():
     return render_template('guess_num_templates/rules.html', basepath=basepath)
+
+@guess_num.route("/view_room_num")
+def view_room_num():
+    room_num = get_room_num()
+    return render_template('guess_num_templates/view_room_num.html', basepath=basepath, room_num=room_num)
 
 
 @guess_num.route("/create")
@@ -83,6 +97,7 @@ def join_room():
 
 @guess_num.route("/check_form", methods=["post"])
 def check_form():
+    logger.critical('now entering....')
     room_num = request.form.get("room_num")
     target_num = request.form.get("target_num")
     if target_num.isdigit():

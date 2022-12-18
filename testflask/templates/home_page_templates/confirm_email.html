@@ -1,0 +1,11 @@
+{% extends 'base_main.html' %}
+{% block content %}
+    <center>
+        账号已创建成功
+        <br>
+        请进入邮件内附的链接，以激活账号
+        <br>
+        <a href="confirm_email?email_address={{ email_address }}&alias={{ alias }}&usercol={{ usercol }}&id={{ id }}">点我发送邮件</a>
+    </center>
+
+{% endblock %}

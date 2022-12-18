@@ -17,13 +17,23 @@ app.config.update(
     MAIL_USE_TLS=False,
     MAIL_USE_SSL=True,
     MAIL_USERNAME='yunfeix2009@163.com',
-    MAIL_PASSWORD='GNVMYPVXMKTVCKCG',
+    MAIL_PASSWORD='QPIHIKHFYKAYFRVW',
     SQLALCHEMY_ECHO=True,
     SQLALCHEMY_TRACK_MODIFICATIONS=False,
     SQLALCHEMY_DATABASE_URI='mysql://root:123456@127.0.0.1:3306/testdb_orm',
     SECRET_KEY=os.urandom(24),
     PERMANENT_SESSION_LIFETIME=timedelta(days=7),
-    log_file_pass='D:\steven'
+    log_file_pass='D:\steven',
+    MAIL_SUBJECT='请激活您的 Say_hello 账号',
+    MAIL_CONTENT="""
+                您好 {0}，\n
+                请从以下链接进入 Say_hello 网站以激活您的账号。\n
+                {1}，\n
+                感谢您对 Say_hello 的支持。\n
+                """,
+
+    ACTIVE_LINK='<a href="http://127.0.0.1:5000/active_statu?id={0}&usercol={1}">click here to active your account<a>'
+
 )
 
 

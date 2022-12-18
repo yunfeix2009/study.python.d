@@ -2,14 +2,10 @@
 {% block content %}
 
     <center>
-        <h1>请登录以提升权限</h1>
+        <h3>没有用户？<a href="register">点我注册</a></h3>
         <br>
-        还没有用户？
-        <a href="register">点我注册</a>
-        <br>
-        <a href="tourist">游客身份</a>
     </center>
-    <form action="login">
+    <form action="" method="post">
         <div class="container">
             <label>用户名 : </label>
             <input type="text" placeholder="请输入用户名" name="username" required>

@@ -1,0 +1,20 @@
+{% extends 'base_main.html' %}
+{%block content%}
+    <center>
+        <table border="2">
+            <thead>
+                <th><h3>房间号</h3></th>
+            </thead>
+            <tbody>
+                {% for i in room_num %}
+                    <tr>
+                        <td>
+                            <h4>{{ i }}</h4>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="">返回</a>
+    </center>
+{%endblock%}

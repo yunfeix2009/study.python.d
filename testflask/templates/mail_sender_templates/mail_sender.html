@@ -1,0 +1,25 @@
+{% extends 'base_main.html' %}
+{% block content %}
+    <center>
+        <h1 class="text-center display-4">
+            <a href="{{ url_for('mail_sender.mainpage') }}" class="text-success"><strong>Say Hello</strong></a>
+            <small class="text-muted sub-title">to the world</small>
+        </h1>
+        {% for message in get_flashed_messages() %}
+            <h3 style="color: red">{{ message }}</h3>
+        {% endfor %}
+    </center>
+    <form method="post" action="send">
+        <div class="container">
+            {{ form.csrf_token() }}
+            {{ form.subject.label }}
+            <p>{{ form.subject }}</p>
+            {{ form.address.label }}
+            <p>{{ form.address }}</p>
+            {{ form.content.label }}
+            <p>{{ form.content }}</p>
+            <p>{{ form.submit() }}</p>
+        </div>
+    </form>
+{% endblock %}
+

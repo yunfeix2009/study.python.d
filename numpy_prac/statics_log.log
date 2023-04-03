@@ -1,0 +1,32 @@
+first ten weight data: [98 84 73 65 63 98 43 93 71 41]
+first ten height data: [144 160 168 138 141 151 167 136 149 174]
+weight standard: 17.50406099964491
+height standard: 15.754279948204251
+weight mean: 69.30153846153846
+height mean: 157.19307692307692
+weight median: 70.0
+height median: 157.0
+weight min: 40
+height min: 130
+weight max: 99
+height max: 184
+weight ptp: 59
+height ptp: 54
+entire weight data: [98 84 73 ... 93 48 45]
+entire height data: [144 160 168 ... 178 167 149]
+first ten weight data: [47 73 70 89 48 49 44 97 49 79]
+first ten height data: [167 175 152 176 153 149 165 182 158 138]
+weight standard: 17.404802625651055
+height standard: 15.873097630971936
+weight mean: 69.53615384615385
+height mean: 156.37846153846155
+weight median: 70.0
+height median: 156.0
+weight min: 40
+height min: 130
+weight max: 99
+height max: 184
+weight ptp: 59
+height ptp: 54
+entire weight data: [47 73 70 ... 44 66 72]
+entire height data: [167 175 152 ... 161 162 131]
